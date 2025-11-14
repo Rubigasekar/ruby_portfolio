@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rubiga Portfolio</title>
+  <meta name="description" content="Portfolio of RUBIGA – Developer, Hacker, and Problem Solver." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lYOm4C2V9C4l4nQmM5b4dJQfQK5a0ZlM7XKX0Pp1Z3nS3u9yQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      --clr-bg: #0f172a; /* slate-900 */
+      --clr-bg-2: #1e293b; /* slate-800 */
+      --clr-fg: #f1f5f9; /* slate-100 */
+      --clr-accent: #ef4444; /* red-500 */
+      --clr-accent-2: #3b82f6; /* blue-500 */
+      --nav-h: 72px;
+      --radius-lg: 1.75rem;
+      --radius-sm: .5rem;
+      --trans-fast: 180ms;
+      --max-w: 1100px;
+    }
+    [data-theme="light"] {
+      --clr-bg: #ffffff;
+      --clr-bg-2: #f1f5f9;
+      --clr-fg: #0f172a;
+    }
+    html {scroll-behavior:smooth;}
+    body {
+      margin:0;
+      font-family:"Poppins",system-ui,Arial,sans-serif;
+      color:var(--clr-fg);
+      background:var(--clr-bg);
+      line-height:1.6;
+      font-size: 16px;
+    }
+    img {max-width:100%;display:block;}
+    a {color:var(--clr-accent-2);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+
+    /* ============ NAVBAR ============ */
+    .nav-wrap {
+      position:sticky;top:0;z-index:1000;
+      backdrop-filter:blur(14px) saturate(140%);
+      -webkit-backdrop-filter:blur(14px) saturate(140%);
+      background:rgba(15,23,42,.6);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    [data-theme="light"] .nav-wrap{background:rgba(255,255,255,.7);}
+
+    nav {
+      max-width:var(--max-w);
+      margin-inline:auto;
+      display:flex;align-items:center;justify-content:space-between;
+      height:var(--nav-h);
+      padding-inline:1.25rem;
+    }
+    .brand {
+      font-weight:700;font-size:1.4rem;letter-spacing:.5px;color:var(--clr-accent-2);
+    }
+    .nav-links {display:flex;align-items:center;gap:1.5rem;}
+    .nav-links a{font-weight:600;font-size:.95rem;color:var(--clr-fg);position:relative;padding:.25rem .5rem;border-radius:var(--radius-sm);}
+    .nav-links a:hover,.nav-links a.active{background:var(--clr-accent-2);color:#fff;text-decoration:none;}
+
+    /* mobile */
+    .nav-toggle{display:none;font-size:1.5rem;background:none;border:none;color:var(--clr-fg);cursor:pointer;}
+    @media (max-width:700px){
+      .nav-links{position:absolute;inset-inline:0;top:var(--nav-h);flex-direction:column;gap:0;background:var(--clr-bg-2);max-height:0;overflow:hidden;transition:max-height var(--trans-fast) ease;}
+      .nav-links.open{max-height:420px;padding-block:1rem;}
+      .nav-links a{width:100%;text-align:center;padding:1rem 0;}
+      .nav-toggle{display:block;}
+    }
+
+    /* dark/light switch */
+    .theme-toggle{margin-left:1rem;cursor:pointer;font-size:1.1rem;}
+
+    /* ============ HERO ============ */
+    .hero {
+      min-height:calc(100dvh - var(--nav-h));
+      width:100%;
+      display:grid;place-items:center;
+      position:relative;
+      text-align:center;
+      color:#fff;
+      background:linear-gradient(rgba(15,23,42,.75),rgba(15,23,42,.85)),url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1500&q=60") center/cover no-repeat fixed;
+    }
+    .hero-inner{max-width:800px;padding:2rem;}
+    .hero h1{font-size:clamp(2.5rem,5vw,4rem);margin:.5rem 0;font-weight:700;}
+    .hero h2{font-size:1.25rem;font-weight:300;max-width:40ch;margin-inline:auto;opacity:.9;}
+    .hero-cta{margin-top:2.5rem;display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;}
+    .btn{
+      --_bg:var(--clr-accent-2);
+      --_fg:#fff;
+      display:inline-block;padding:.85rem 1.75rem;font-size:1rem;font-weight:600;border-radius:999px;border:2px solid var(--_bg);color:var(--_fg);background:var(--_bg);cursor:pointer;transition:transform var(--trans-fast),box-shadow var(--trans-fast),background var(--trans-fast),color var(--trans-fast);
+    }
+    .btn.alt{--_bg:transparent;--_fg:var(--clr-accent-2);background:transparent;color:var(--clr-accent-2);}
+    .btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 6px 20px rgba(0,0,0,.35);text-decoration:none;}
+    .btn.alt:hover{background:var(--clr-accent-2);color:#fff;}
+
+    /* ============ SECTIONS ============ */
+    section{padding:6rem 1.5rem;max-width:var(--max-w);margin-inline:auto;position:relative;}
+    section h2{font-size:2rem;margin-bottom:2.5rem;text-align:center;}
+    .section-sub{max-width:60ch;margin:-1.75rem auto 3.5rem;text-align:center;opacity:.8;font-size:1rem;}
+
+    /* about */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+    .about-grid img{border-radius:var(--radius-lg);}
+    @media(max-width:800px){.about-grid{grid-template-columns:1fr;text-align:center;}}
+
+    .skill-tags{margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:.5rem;}
+    .skill-tags span{padding:.4rem .85rem;border-radius:999px;background:var(--clr-accent-2);color:#fff;font-size:.85rem;}
+
+    /* projects */
+    .proj-grid{   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  align-items: start;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:2rem;}
+    .proj-card{background:var(--clr-bg-2);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;transition:transform var(--trans-fast),box-shadow var(--trans-fast);}    
+    .proj-card:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 10px 32px rgba(0,0,0,.4);}    
+    .proj-card img{aspect-ratio:16/9;object-fit:cover;width:100%;}
+    .proj-card-content{padding:1.5rem;flex-grow:1;display:flex;flex-direction:column;}
+    .proj-card-content h3{margin-top:0;margin-bottom:.5rem;font-size:1.25rem;}
+    .proj-card-content p{flex-grow:1;opacity:.85;font-size:.95rem;}
+    .proj-card-links{margin-top:1.25rem;display:flex;gap:.75rem;flex-wrap:wrap;}
+    .btn.sm{padding:.5rem 1rem;font-size:.85rem;}
+
+    /* hackathon timeline */
+    .timeline{margin:0;padding:0;list-style:none;max-width:700px;margin-inline:auto;position:relative;}
+    .timeline:before{content:"";position:absolute;left:calc(50% - 2px);top:0;bottom:0;width:4px;background:var(--clr-accent-2);opacity:.5;}
+    .timeline-item{position:relative;margin:2.5rem 0;padding-inline-start:calc(50% + 2rem);min-height:80px;}
+    .timeline-item:before{content:"";position:absolute;left:calc(50% - .75rem);top:.75rem;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--clr-accent-2);border:3px solid var(--clr-bg);box-shadow:0 0 0 4px var(--clr-accent-2);}    
+    .timeline-item:nth-child(even){padding-inline-start:0;padding-inline-end:calc(50% + 2rem);text-align:right;}
+    .timeline-item:nth-child(even):before{left:auto;right:calc(50% - .75rem);}    
+    .timeline-item h3{margin:.25rem 0;font-size:1.2rem;}
+    .timeline-item time{font-size:.85rem;opacity:.7;}
+    .timeline-item p{margin:.5rem 0 0;opacity:.85;}
+    @media(max-width:600px){
+      .timeline:before{left:0;}
+      .timeline-item,.timeline-item:nth-child(even){padding-inline:2rem;text-align:left;}
+      .timeline-item:before,.timeline-item:nth-child(even):before{left:-.75rem;right:auto;}
+    }
+
+    /* certifications */
+    .cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1.75rem;align-items:stretch;}
+    .cert-card{background:var(--clr-bg-2);padding:2rem 1.25rem;border-radius:var(--radius-lg);text-align:center;transition:transform var(--trans-fast),box-shadow var(--trans-fast);}    
+    .cert-card:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 8px 26px rgba(0,0,0,.35);}    
+    .cert-card h3{margin:0 0 .5rem;font-size:1.1rem;}
+    .cert-card p{margin:0 0 1rem;opacity:.8;font-size:.9rem;}
+
+    /* coding profiles */
+    .coding-links{display:flex;justify-content:center;align-items:center;gap:2rem;flex-wrap:wrap;margin-top:2.5rem;}
+    .coding-card{width:220px;padding:2rem 1rem;background:var(--clr-bg-2);border-radius:var(--radius-lg);text-align:center;transition:transform var(--trans-fast),box-shadow var(--trans-fast);}    
+    .coding-card:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 8px 24px rgba(0,0,0,.4);}    
+    .coding-card img{width:64px;height:64px;object-fit:contain;margin-inline:auto;margin-bottom:1rem;}
+    .coding-card h3{margin:0 0 .25rem;font-size:1.05rem;}
+
+    /* resume */
+    .resume-cta{text-align:center;margin-top:2.5rem;}
+
+    /* contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;max-width:800px;margin-inline:auto;}
+    @media(max-width:700px){.contact-grid{grid-template-columns:1fr;}}
+
+    form.contact-form{display:grid;gap:1rem;width:100%;}
+    .contact-form input,.contact-form textarea{width:100%;padding:.9rem 1.1rem;font-size:1rem;border-radius:var(--radius-sm);border:none;color:var(--clr-fg);background:var(--clr-bg-2);}    
+    .contact-form textarea{min-height:160px;resize:vertical;}
+    .contact-form button{justify-self:start;}
+
+    .contact-info{font-size:1rem;line-height:1.8;}
+    .contact-info a{color:var(--clr-accent-2);font-weight:600;}
+    .social-icons{margin-top:1.25rem;display:flex;gap:1rem;}
+    .social-icons a{font-size:1.35rem;color:var(--clr-fg);transition:color var(--trans-fast),transform var(--trans-fast);}    
+    .social-icons a:hover{color:var(--clr-accent-2);transform:scale(1.15);}
+
+    /* footer */
+    footer{padding:3rem 1rem;text-align:center;font-size:.9rem;opacity:.7;}
+
+    /* reveal animation */
+    .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease;}
+    .reveal.visible{opacity:1;transform:none;}
+
+    /* back to top */
+    #backToTop{position:fixed;bottom:1.75rem;right:1.75rem;z-index:999;display:none;}
+    #backToTop.show{display:block;}
+  </style>
+</head>
+<body>
+  <div class="nav-wrap" id="top">
+    <nav>
+      <a href="#home" class="brand">RUBIGA S</a>
+      <button class="nav-toggle" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+      <div class="nav-links" id="navLinks">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#hackathon">Hackathon</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#coding">Coding</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+        <span class="theme-toggle" id="themeToggle" title="Toggle light/dark"><i class="fa-solid fa-moon"></i></span>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Hero -->
+  <header id="home" class="hero">
+    <div class="hero-inner reveal">
+      <h1>Hi, I'm <span style="color:var(--clr-accent-2)">RUBIGA S</span></h1>
+      <h2>Developer • Problem Solver • Tech Enthusiast</h2>
+      <div class="hero-cta">
+        <a href="#projects" class="btn">View Projects</a>
+        <a href="#contact" class="btn alt">Get In Touch</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about" class="reveal">
+  <h2>About Me</h2>
+  <p class="section-sub">
+    Hello! I'm <strong>RUBIGA</strong>, a software developer from <em>Salem, Tamil Nadu</em>.  
+    I enjoy building full‑stack web applications, exploring IoT prototypes, and tackling algorithmic problems.  
+    I'm currently focused on Java, DSA preparation, and exploring cloud basics.
+  </p>
+  <div class="about-grid" style="display: flex; align-items: center; gap: 2rem;">
+  <div>
+    <p>
+      Outside of coding, I love participating in hackathons, mentoring peers, and experimenting with hardware‑software integrations.
+    </p>
+    <div class="skill-tags">
+      <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Java</span><span>DSA</span><span>IoT</span>
+    </div>
+  </div>
+  <img src="WhatsApp Image 2025-07-27 at 11.49.39 AM.jpeg" alt="RUBIGA's portrait" style="width: 200px; height: auto; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+</div>
+</section>
+
+
+  <!-- Projects -->
+  <section id="projects" class="reveal">
+    <h2>Projects</h2>
+    <p class="section-sub">Some of the work I'm proud of. Add your GitHub links!</p>
+    <div class="proj-grid">
+      <!-- Project 1 -->
+      <article class="proj-card">
+      <img src="foodyard.png" alt="Project screenshot" />
+      <div class="proj-card-content">
+      <h3>FoodYard – Food Waste Management</h3>
+      <p>Redistributes excess food to the needy and collects organic waste for composting with a clean UI and notification system.</p>
+      <div class="proj-card-links">
+      <a class="btn sm" href="https://rubigasekar.github.io/MINIPROJECT/" target="_blank" rel="noopener">Demo</a>
+      <a class="btn sm alt" href="https://github.com/Rubigasekar/MINIPROJECT" target="_blank" rel="noopener">Code</a>
+      </div>
+      </div>
+      </article>
+
+      <!-- Project 2-->
+<article class="proj-card">
+  <img src="Screenshot 2025-10-07 145202.png" alt="Project screenshot" />
+  <div class="proj-card-content">
+    <h3>To-Do List</h3>
+    <p>Uses hand tracking to control the cursor with gestures, built using OpenCV and Python, no physical mouse needed.</p>
+    <div class="proj-card-links">
+      <a class="btn sm" href="https://rubigasekar.github.io/todo/" target="_blank" rel="noopener">Demo</a>
+      <a class="btn sm alt" href="https://github.com/Rubigasekar/todo/blob/main/index.html" target="_blank" rel="noopener">Code</a>
+    </div>
+  </div>
+ </article>
+ 
+      <!-- Project 3 -->
+      <article class="proj-card">
+        <img src="Voting_system.jpeg" alt="Project screenshot" />
+        <div class="proj-card-content">
+          <h3>Biometric Voting + IoT</h3>
+          <p>Secure biometric voter auth over I²C; votes transmitted via MQTT; admin mobile app for dashboards.</p>
+        </div>
+      </article>
+
+
+      <!-- Project 4 -->
+      <article class="proj-card">
+        <img src="smartTraffic.jpg" alt="Project screenshot" />
+        <div class="proj-card-content">
+          <h3>Smart Parking (MQTT)</h3>
+          <p>Book slots remotely; real‑time occupancy; Arduino sensors push updates to cloud; user app reserves spots.</p>
+        </div>
+      </article>
+
+
+
+    </div>
+  </section>
+
+  <!-- Hackathon -->
+  <section id="hackathon" class="reveal">
+  <h2>Hackathon Journey</h2>
+  <p class="section-sub">My real hackathon experiences and achievements so far.</p>
+  <ol class="timeline">
+    <li class="timeline-item">
+      <h3>ICT Academy Hackathon – Finalist</h3>
+      <time>Jan 28, 2025</time>
+      <p>
+        Participated at Annapoorna Engineering College, Salem.  
+        Cleared two tough rounds and reached the final round among the top 100 teams.  
+        Organized by ICT Academy in collaboration with Over Weaver.
+      </p>
+    </li>
+    <li class="timeline-item">
+      <h3>HackIndia 2025</h3>
+      <time>Mar 6–7, 2025</time>
+      <p>
+        Cleared the first round by submitting an innovative idea,  
+        completed the second round by submitting code, and presented to the jury in the third round.  
+        Couldn't attend the final event.
+      </p>
+    </li>
+    <li class="timeline-item">
+      <h3>TN-Wise Hackathon</h3>
+      <time>Mar 14, 2025</time>
+      <p>
+        Actively participated in a statewide hackathon, learning collaborative problem solving  
+        and presenting real-world solutions.
+      </p>
+    </li>
+  </ol>
+</section>
+
+
+  <!-- Certifications -->
+  <section id="certifications" class="reveal">
+  <h2>Certifications</h2>
+  <p class="section-sub">Some of my verified course completions and achievements.</p>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <h3>Codetantra –Java</h3>
+      <p>Completed programming fundamentals and OOPs with Codetantra.</p>
+      <a class="btn sm alt" href="Java programming Codetantra.pdf" target="_blank">View</a>
+    </div>
+    <div class="cert-card">
+      <h3>Codetantra –C</h3>
+      <p>Completed programming fundamentals and OOPs with Codetantra.</p>
+      <a class="btn sm alt" href="C programming codetantra.pdf" target="_blank">View</a>
+    </div>
+    <div class="cert-card">
+      <h3>NPTEL – Cloud Computing</h3>
+      <p>Learned cloud architecture, services, and deployment models.</p>
+      <a class="btn sm alt" href="Cloud Computing.pdf" target="_blank">View</a>
+    </div>
+    <div class="cert-card">
+      <h3>Foundation of Cloud, IoT & Edge ML</h3>
+      <p>Explored cloud-IoT integration and edge-based machine learning.</p>
+      <a class="btn sm alt" href="Foundation of Cloud IoT Edge ML.pdf" target="_blank">View</a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Coding Profiles -->
+  <section id="coding" class="reveal">
+    <h2>Coding Profiles</h2>
+    <p class="section-sub">Track my problem‑solving progress on major platforms.</p>
+    <div class="coding-links">
+      <a class="coding-card" href="https://www.geeksforgeeks.org/user/rubikase0fnz/" target="_blank" rel="noopener">
+        <img src="gfg.jpg" alt="GeeksforGeeks" />
+        <h3>GeeksforGeeks</h3>
+        <p>See my practice problems & coding streak.</p>
+      </a>
+      <a class="coding-card" href="https://leetcode.com/u/rubigasekar/" target="_blank" rel="noopener">
+        <img src="leetcode.png" alt="LeetCode" />
+        <h3>LeetCode</h3>
+        <p>Check my rankings & submissions.</p>
+      </a>
+      <!-- Add more coding sites if you like -->
+    </div>
+  </section>
+
+  <!-- Resume -->
+  <section id="resume" class="reveal">
+    <h2>Resume</h2>
+    <p class="section-sub">Grab a copy of my latest resume (PDF).</p>
+    <div class="resume-cta">
+      <a class="btn" href="Rubiga_Resume (5).pdf" download>Download Resume</a>
+      <a class="btn alt" href="Rubiga_Resume (5).pdf" target="_blank" rel="noopener">View in Browser</a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="reveal">
+    <h2>Contact</h2>
+    <p class="section-sub">Let's collaborate, build something, or just say hi!</p>
+    <div class="contact-grid">
+      <form class="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+      <div class="contact-info">
+        <p><strong>Email:</strong> <a href="rubikasekar123@gmail.com">rubikasekar123@gmail.com</a></p>
+        <p><strong>Location:</strong>Salem,TamilNadu,India</p>
+        <p><strong>Phone:</strong> +91-9342939909</p>
+        <div class="social-icons">
+          <a href="https://github.com/Rubigasekar" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="www.linkedin.com/in/rubiga05" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <button id="backToTop" class="btn alt" aria-label="Back to top"><i class="fa fa-arrow-up"></i></button>
+
+  <footer>
+    <p>© <span id="year"></span> RUBY. Built with ♥ and lots of caffeine.</p>
+  </footer>
+
+  <script>
+    // ====== Mobile Nav Toggle ======
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle?.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    // Close nav when clicking a link (mobile)
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // ====== Scroll Active Link ======
+    const sections = [...document.querySelectorAll('header[id], section[id]')];
+    const navAnchors = [...navLinks.querySelectorAll('a')];
+    const setActive = id => {
+      navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    };
+    const onScroll = () => {
+      const scrollPos = window.scrollY + window.innerHeight / 2;
+      let current = 'home';
+      sections.forEach(sec => {
+        const top = sec.offsetTop - 100;
+        if (scrollPos >= top) current = sec.id;
+      });
+      setActive(current);
+    };
+    document.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+
+    // ====== Reveal on Scroll ======
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold:.12});
+    reveals.forEach(el => io.observe(el));
+
+    // ====== Back to Top ======
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) backToTopBtn.classList.add('show');
+      else backToTopBtn.classList.remove('show');
+    }, {passive:true});
+    backToTopBtn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+    // ====== Year in Footer ======
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ====== Theme Toggle (light/dark) ======
+    const themeToggle = document.getElementById('themeToggle');
+    const docEl = document.documentElement;
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) docEl.setAttribute('data-theme', storedTheme);
+    updateThemeIcon();
+
+    themeToggle?.addEventListener('click', () => {
+      const current = docEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      docEl.setAttribute('data-theme', current);
+      localStorage.setItem('theme', current);
+      updateThemeIcon();
+    });
+
+    function updateThemeIcon(){
+      const isLight = docEl.getAttribute('data-theme') === 'light';
+      themeToggle.innerHTML = isLight ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    }
+  </script>
+</body>
+</html>
